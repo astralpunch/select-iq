@@ -1,0 +1,118 @@
+.container
+  margin auto
+  margin-top 100px
+
+.select
+  position relative
+  width 200px
+  margin auto
+
+  &__input
+    position relative
+    display block
+    cursor pointer
+    padding 0 10px
+    outline none
+    height 40px
+    width 200px
+    border 1px solid #c7c9cc
+    background-color rgba(0, 0, 0, 0)
+    border-radius 5px
+    font-size 14px
+    &:focus + .select__label-text
+      font-size 15px
+      font-weight 500
+      top -8px
+      z-index 10
+      color #000
+  
+  &__label
+    display block
+    position relative
+    &--with-text 
+      .select__label-text 
+        font-size 15px
+        top -10px
+        z-index 20
+        font-weight 500
+        color #000
+
+  &__label-text
+    display block
+    font-size 18px
+    position absolute
+    cursor pointer
+    left 0
+    top 7px
+    z-index -10
+    color #000
+    margin-left 5px
+    padding-left 10px
+    padding-right 10px
+    transition all 300ms
+    background #fff
+
+  &__menu
+    position absolute
+    top 40px
+    left 0px
+    right 0px
+    z-index 20
+    margin 0 auto
+    max-height 300px
+    width 220px
+    overflow auto
+    background-color #fff
+    border 1px solid #c7c9cc
+    border-radius 0 0 5px 5px
+    ul
+      margin 0
+      padding 0
+      list-style-type none
+    &--opened-up
+      top auto
+      border-radius 5px 5px 0 0
+      bottom 90%
+    &--empty
+      min-height 30px
+      text-align center
+
+  &__arrow
+    position absolute
+    z-index 10
+    top 15px
+    cursor pointer
+    right 0
+    z-index -10
+    border solid black
+    border-width 0 3px 3px 0
+    display inline-block
+    padding 3px
+    &--down
+      transform rotate(45deg)
+    &--up
+      transform rotate(-135deg)
+
+  
+  &__option
+    height 40px
+    padding 0 20px
+    &--selected
+      background-color #f2e8d0
+    &:hover
+      background-color #f2e8d0
+      cursor pointer
+    &::first-letter
+      text-transform capitalize
+
+  &__highlighted-text
+    color #f9d577
+    text-decoration underline
+
+.select-native-container
+  width 100px
+  margin auto
+  border 1px solid black
+
+
+    
