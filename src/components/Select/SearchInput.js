@@ -39,12 +39,13 @@ class SearchInput extends Component {
           ref={this.searchInputRef}
           onChange={this.inputChangeHandler}
           className="select__input"
-          onTouchStart={this.props.toggleNativeSelect}
           type="text"
-          onFocus={this.toggleMenuHandler}
+          onClick={this.toggleMenuHandler}
           value={this.getValue()}
         />
-        <span className="select__label-text">{this.props.placeholder}</span>
+        {!this.props.isMenuFlipped && (
+          <span className="select__label-text">{this.props.placeholder}</span>
+        )}
         <span
           className={classnames('select__arrow', {
             'select__arrow--up': this.props.isExpanded,

@@ -7,19 +7,17 @@ import Option from './Option';
 class OptionsList extends Component {
   optionsListRef = React.createRef();
 
-  state = {
-    isFliped: false,
-  };
-
   componentDidMount() {
     this.scrollToSelected();
 
     const listElemBottom =
       this.optionsListRef.current && this.optionsListRef.current.getBoundingClientRect().bottom;
 
-    this.setState({
-      isFliped: listElemBottom > window.innerHeight,
-    });
+    this.props.setIsFlipped(listElemBottom > window.innerHeight);
+  }
+
+  componentWillUnmount() {
+    this.props.setIsFlipped(false);
   }
 
   scrollToSelected = () => {
@@ -52,7 +50,7 @@ class OptionsList extends Component {
       return (
         <div
           className={classnames('select__menu', {
-            'select__menu--opened-up': this.state.isFliped,
+            'select__menu--opened-up': this.props.isMenuFlipped,
           })}
           ref={this.optionsListRef}
         >

@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 
+import { isTouchDevice } from './helpers';
 import { withClickOutside } from './withClickOutside';
 import SearchInput from './SearchInput';
 import OptionsList from './OptionsList';
@@ -12,8 +13,11 @@ class Select extends Component {
     onInput: () => {},
   };
 
+  nativeSelectRef = React.createRef();
+
   state = {
     isExpanded: false,
+    isMenuFlipped: false,
     showNativeSelect: false,
   };
 
@@ -21,21 +25,17 @@ class Select extends Component {
     if (this.state.isExpanded) {
       this.toggleMenu();
     }
-
-    if (this.state.showNativeSelect) {
-      this.toggleNativeSelect();
-    }
   };
 
-  toggleMenu = () => {
+  setIsFlipped = isFlipped =>
+    this.setState({
+      isMenuFlipped: isFlipped,
+    });
+
+  toggleMenu = () =>
     this.setState(prevState => ({
       isExpanded: !prevState.isExpanded,
     }));
-  };
-
-  toggleNativeSelect = () => {
-    this.setState(prevState => ({ showNativeSelect: !prevState.showNativeSelect }));
-  };
 
   selectOptionHandler = option => () => {
     this.props.onChange(option);
@@ -47,7 +47,6 @@ class Select extends Component {
     const selectedOption = this.props.options.filter(option => option.value === value)[0];
 
     this.props.onChange(selectedOption);
-    this.toggleNativeSelect();
   };
 
   renderInput = () => {
@@ -58,8 +57,8 @@ class Select extends Component {
         value={this.props.value}
         selected={this.props.selected}
         isExpanded={this.state.isExpanded}
-        toggleNativeSelect={this.toggleNativeSelect}
         toggleMenu={this.toggleMenu}
+        isMenuFlipped={this.state.isMenuFlipped}
       />
     );
   };
@@ -74,30 +73,32 @@ class Select extends Component {
         selectOption={this.selectOptionHandler}
         selected={this.props.selected}
         value={this.props.value}
+        setIsFlipped={this.setIsFlipped}
+        isMenuFlipped={this.state.isMenuFlipped}
       />
     );
   };
 
+  renderNativeSelect = () => (
+    <select
+      className="native-select"
+      onChange={this.nativeSelectValueHandler}
+      value={this.props.selected ? this.props.selected.value : ''}
+    >
+      {this.props.options.map(option => (
+        <option key={option.value} value={option.value}>
+          {option.label}
+        </option>
+      ))}
+    </select>
+  );
+
   renderSelect = () => {
-    const { selected, options } = this.props;
-
-    if (!this.state.showNativeSelect) {
-      return (
-        <div className="select">
-          {this.renderInput()}
-          {this.renderOptions()}
-        </div>
-      );
-    }
-
     return (
-      <select onChange={this.nativeSelectValueHandler} value={selected ? selected.value : ''}>
-        {options.map(option => (
-          <option key={option.value} value={option.value}>
-            {option.label}
-          </option>
-        ))}
-      </select>
+      <div className="select">
+        {this.renderInput()}
+        {isTouchDevice() ? this.renderNativeSelect() : this.renderOptions()}
+      </div>
     );
   };
 
