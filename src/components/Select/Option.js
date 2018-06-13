@@ -1,5 +1,6 @@
 import React from 'react';
 import classnames from 'classnames';
+import PropTypes from 'prop-types';
 
 const formatLabel = (value, label) => {
   const regex = new RegExp(value, 'gi');
@@ -33,6 +34,19 @@ const Option = props => {
       {formatLabel(props.value, props.option.label)}
     </li>
   );
+};
+
+Option.propTypes = {
+  option: PropTypes.shape({
+    label: PropTypes.string,
+    value: PropTypes.string,
+  }).isRequired,
+  selectOption: PropTypes.func.isRequired,
+  value: PropTypes.string,
+  selected: PropTypes.shape({
+    label: PropTypes.string,
+    value: PropTypes.string,
+  }),
 };
 
 export default Option;

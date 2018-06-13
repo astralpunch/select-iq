@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import classnames from 'classnames';
+import PropTypes from 'prop-types';
 
 class SearchInput extends Component {
   searchInputRef = React.createRef();
@@ -43,9 +44,7 @@ class SearchInput extends Component {
           onClick={this.toggleMenuHandler}
           value={this.getValue()}
         />
-        {!this.props.isExpandedUp && (
-          <span className="select__label-text">{this.props.placeholder}</span>
-        )}
+        <span className="select__label-text">{this.props.placeholder}</span>
         <span
           className={classnames('select__arrow', {
             'select__arrow--up': this.props.isExpanded,
@@ -56,5 +55,18 @@ class SearchInput extends Component {
     );
   }
 }
+
+SearchInput.propTypes = {
+  isExpanded: PropTypes.bool.isRequired,
+  value: PropTypes.string,
+  selected: PropTypes.shape({
+    label: PropTypes.string,
+    value: PropTypes.string,
+  }),
+  placeholder: PropTypes.string.isRequired,
+  onInput: PropTypes.func,
+  toggleNativeSelect: PropTypes.func,
+  toggleMenu: PropTypes.func,
+};
 
 export default SearchInput;

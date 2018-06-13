@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import classnames from 'classnames';
+import PropTypes from 'prop-types';
 
 import Option from './Option';
 
@@ -67,5 +68,16 @@ class OptionsList extends Component {
     return this.getMenu();
   }
 }
+
+OptionsList.propTypes = {
+  isExpanded: PropTypes.bool.isRequired,
+  value: PropTypes.string,
+  selected: PropTypes.shape({
+    label: PropTypes.string,
+    value: PropTypes.string,
+  }),
+  selectOption: PropTypes.func.isRequired,
+  options: PropTypes.array.isRequired,
+};
 
 export default OptionsList;

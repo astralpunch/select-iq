@@ -60,7 +60,6 @@ class Select extends Component {
         isExpanded={this.state.isExpanded}
         toggleNativeSelect={this.toggleNativeSelect}
         toggleMenu={this.toggleMenu}
-        isExpandedUp={this.state.isExpandedUp}
       />
     );
   };
@@ -75,8 +74,6 @@ class Select extends Component {
         selectOption={this.selectOptionHandler}
         selected={this.props.selected}
         value={this.props.value}
-        setIsExpandedUp={this.setIsExpandedUp}
-        isExpandedUp={this.state.isExpandedUp}
       />
     );
   };
@@ -109,8 +106,6 @@ class Select extends Component {
   }
 }
 
-export default withClickOutside(Select);
-
 Select.propTypes = {
   options: PropTypes.array.isRequired,
   onChange: PropTypes.func,
@@ -122,3 +117,5 @@ Select.propTypes = {
   }),
   placeholder: PropTypes.string,
 };
+
+export default withClickOutside(Select);
