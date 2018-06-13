@@ -18,7 +18,6 @@ class Select extends Component {
   state = {
     isExpanded: false,
     isMenuFlipped: false,
-    showNativeSelect: false,
   };
 
   clickOutsideHandler = () => {
