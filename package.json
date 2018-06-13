@@ -58,6 +58,7 @@
     "collectCoverageFrom": [
       "src/**/*.{js,jsx,mjs}"
     ],
+    "setupTestFrameworkScriptFile": "<rootDir>src/setupTests.js",
     "setupFiles": [
       "<rootDir>/config/polyfills.js"
     ],
@@ -97,6 +98,8 @@
     "extends": "react-app"
   },
   "devDependencies": {
+    "enzyme": "^3.3.0",
+    "enzyme-adapter-react-16": "^1.1.1",
     "stylus": "^0.54.5",
     "stylus-loader": "^3.0.2"
   }

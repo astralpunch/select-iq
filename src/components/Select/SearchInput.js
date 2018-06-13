@@ -37,11 +37,11 @@ class SearchInput extends Component {
       >
         <input
           ref={this.searchInputRef}
-          onInput={this.inputChangeHandler}
+          onChange={this.inputChangeHandler}
           className="select__input"
           onTouchStart={this.props.toggleNativeSelect}
           type="text"
-          onClick={this.toggleMenuHandler}
+          onFocus={this.toggleMenuHandler}
           value={this.getValue()}
         />
         <span className="select__label-text">{this.props.placeholder}</span>

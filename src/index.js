@@ -6,6 +6,7 @@ import store from './store';
 import App from './components/App';
 
 import './stylus/index.styl';
+import './setupTests';
 
 ReactDOM.render(
   <Provider store={store}>
